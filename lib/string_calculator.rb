@@ -1,6 +1,12 @@
 class StringCalculator
     def self.add(numbers)
         return 0 if numbers.empty?
-        numbers.split(/,|\n/).map(&:to_i).sum
+        parse_numbers(numbers).sum
+    end
+
+    private
+  
+    def self.parse_numbers(numbers)
+        numbers.split(/,|\n/).map(&:to_i)
     end
   end
