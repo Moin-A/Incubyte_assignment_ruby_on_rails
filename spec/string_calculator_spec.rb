@@ -30,7 +30,15 @@ describe StringCalculator do
     it 'supports different delimiters' do
         expect(StringCalculator.add("//;\n1;2")).to eq(3)
         expect(StringCalculator.add("//|\n1|2|3")).to eq(6)
-      end
+    end
+
+    it 'throws exception for negative numbers' do
+        expect { StringCalculator.add("-1,2") }.to raise_error("negative numbers not allowed -1")
+    end
+      
+    it 'throws exception with all negative numbers listed' do
+        expect { StringCalculator.add("2,-4,3,-5") }.to raise_error("negative numbers not allowed -4,-5")
+    end
 
   end
 end
