@@ -2,12 +2,20 @@ class StringCalculator
     def self.add(numbers)
        return 0 if numbers.empty?
 
-        if custom_delemiter?(numbers)
+        nums = if custom_delemiter?(numbers)
            delimiter, numbers_part = extract_custom_delimiter(numbers)
-           numbers_part.split(delimiter).map(&:to_i).sum
+           numbers_part.split(delimiter).map(&:to_i)
         else
-           parse_numbers(numbers).sum
+           parse_numbers(numbers)
         end
+
+        negatives =  nums.select { |n| n < 0 }
+
+        unless negatives.empty?
+            raise "negative numbers not allowed #{negatives.join(',')}"
+        end
+          
+        nums.sum
     end
 
     private
