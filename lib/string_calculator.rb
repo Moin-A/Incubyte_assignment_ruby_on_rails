@@ -2,7 +2,7 @@ class StringCalculator
     def self.add(numbers)
        return 0 if numbers.empty?
 
-        if numbers.start_with?('//')
+        if custom_delemiter?(numbers)
            delimiter, numbers_part = extract_custom_delimiter(numbers)
            numbers_part.split(delimiter).map(&:to_i).sum
         else
@@ -11,6 +11,10 @@ class StringCalculator
     end
 
     private
+
+    def self.custom_delemiter?(numbers)
+        numbers.start_with?('//')
+    end    
   
     def self.parse_numbers(numbers)
         numbers.split(/,|\n/).map(&:to_i)
